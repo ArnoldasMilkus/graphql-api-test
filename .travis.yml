@@ -1,0 +1,34 @@
+language: php
+
+dist: trusty
+
+sudo: required
+
+php:
+    - 7.3
+
+services:
+    - memcached
+
+cache:
+    directories:
+        - vendor
+        - bin
+
+before_install:
+    - phpenv config-rm xdebug.ini || true
+    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+    - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+install:
+    - composer install --no-interaction --prefer-dist
+
+before_script:
+    - bin/console doctrine:database:create --env=test_cached -vvv # Have to be run with debug = true, to omit generating proxies before setting up the database
+    - bin/console cache:warmup --env=test_cached --no-debug -vvv
+    - bin/console doctrine:migrations:migrate --no-interaction --env=test_cached --no-debug -vvv
+
+script:
+    - echo "Running phpunit"
+    - ./vendor/bin/simple-phpunit
