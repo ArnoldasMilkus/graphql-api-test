@@ -1,0 +1,6 @@
+App\Entity\product:
+  product_{1..100}:
+    name: <name()>
+    expirationDate: <(new \DateTimeImmutable())>
+    quantity: <numberBetween(0, 5)>
+    dimension: <text()>
