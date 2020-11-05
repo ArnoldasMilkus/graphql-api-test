@@ -26,6 +26,7 @@ install:
 
 before_script:
     - bin/console doctrine:database:create --env=test -vvv # Have to be run with debug = true, to omit generating proxies before setting up the database
+    - bin/console doctrine:schema:create --env=test -vvv
     - bin/console cache:warmup --env=test --no-debug -vvv
 
 script:
