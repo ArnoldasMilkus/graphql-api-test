@@ -35,3 +35,4 @@ before_script:
 script:
     - echo "Running phpunit"
     - vendor/bin/simple-phpunit
+    - vendor/bin/yaml-lint ./
