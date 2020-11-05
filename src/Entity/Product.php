@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -45,100 +46,60 @@ class Product
      */
     private $dimension;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     *
-     * @return Product
-     */
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     *
-     * @return Product
-     */
-    public function setName(?string $name): Product
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
     public function getExpirationDate(): ?\DateTimeImmutable
     {
         return $this->expirationDate;
     }
 
-    /**
-     * @param \DateTimeImmutable|null $expirationDate
-     *
-     * @return Product
-     */
-    public function setExpirationDate(?\DateTimeImmutable $expirationDate): Product
+    public function setExpirationDate(?\DateTimeImmutable $expirationDate): self
     {
         $this->expirationDate = $expirationDate;
 
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getQuantity(): float
     {
         return $this->quantity;
     }
 
-    /**
-     * @param float $quantity
-     *
-     * @return Product
-     */
-    public function setQuantity(float $quantity): Product
+    public function setQuantity(float $quantity): self
     {
         $this->quantity = $quantity;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDimension(): ?string
     {
         return $this->dimension;
     }
 
-    /**
-     * @param string|null $dimension
-     *
-     * @return Product
-     */
-    public function setDimension(?string $dimension): Product
+    public function setDimension(?string $dimension): self
     {
         $this->dimension = $dimension;
 

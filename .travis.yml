@@ -33,3 +33,4 @@ script:
     - echo "Running phpunit"
     - vendor/bin/simple-phpunit
     - vendor/bin/yaml-lint ./
+    - vendor/bin/phpstan analyse src/ --level=5
