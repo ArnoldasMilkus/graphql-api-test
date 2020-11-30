@@ -30,7 +30,10 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
-    - name: Dependency Checker
-      # You may pin to the exact commit or the version.
-      # uses: Marcisbee/dependency-check-action@58eaa9fbfb73f0ea3637d894c111d374f0ca1186
-      uses: Marcisbee/dependency-check-action@1.0.1
+    - uses: actions/checkout@v2
+    - uses: symfonycorp/security-checker-action@v2
+      with:
+          disable-exit-code: 1
+      id: security-check
+    - name: Display the vulnerabilities as JSON
+      run: echo ${{ steps.security-check.outputs.vulns }}
